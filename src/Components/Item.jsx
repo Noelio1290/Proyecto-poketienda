@@ -1,7 +1,6 @@
 import React from 'react';
 
-const ItemRender = (props) => {
-  const {name,cost,img} = props
+const Item = ({name,cost,img} ) => {
   return (
     <div className='item'>
         <img src={img} alt=""/>
@@ -11,4 +10,4 @@ const ItemRender = (props) => {
   );
 };
 
-export default ItemRender;
+export default Item;

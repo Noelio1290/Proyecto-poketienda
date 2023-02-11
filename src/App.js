@@ -1,12 +1,12 @@
 import './App.css';
-import ItemRender from './Components/Item';
+import ItemContainer from './Components/Item-Container';
 import Total from './Components/Total';
 import ButtonPago from './Components/Button-Pay';
 import Wallet from './Components/Wallet';
 import ButtonAdd from './Components/Button-Add';
 import ButtonRemove from './Components/Button-Remove';
 
-const items = [
+const itemsList = [
   {
       name:"Potion",
       cost: 200,
@@ -29,19 +29,19 @@ const items = [
 function App() {
   return (
     <div className="App">
-      <div className='contenedorItem'>
-        <ItemRender img={items.img} name={items.name} cost={items.cost}/>
+      <div className='itemcontainer'>
+        <ItemContainer items={itemsList}/>
       </div>
-      <div className='zona-Bolsillo'>
+      <div className='wallet-zone'>
         <div className='total'>
           <Total/>
         </div>
         <div className='button-Pay'>
           <ButtonPago/>
         </div>
-        <div className='billetera'>
+        <div className='wallet'>
           <Wallet/>
-          <div className='buttons-Billetera'>
+          <div className='wallet buttons'>
             <ButtonAdd/>
             <ButtonRemove/>
           </div>
