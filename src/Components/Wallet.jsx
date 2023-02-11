@@ -2,7 +2,7 @@ import React from 'react';
 
 function Wallet() {
     return (
-      <div>
+      <div className='myMoney'>
         <p>Mi dinero : $$$$$</p>
       </div>
     );

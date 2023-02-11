@@ -29,7 +29,7 @@ const itemsList = [
 function App() {
   return (
     <div className="App">
-      <div className='itemcontainer'>
+      <div className='item-counter'>
         <ItemContainer items={itemsList}/>
       </div>
       <div className='wallet-zone'>
