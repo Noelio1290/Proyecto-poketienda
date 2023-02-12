@@ -1,17 +1,17 @@
 import { useState } from "react"; 
 
-const CounterItem = ({clickHandler}) => {
+const CounterItem = ({increaseAmountButton,drecreaseAmountButton}) => {
     let [count, setCount] = useState(0)
     const increasingHandler = () => {
               setCount(count + 1);
-              clickHandler()
-              
-            
-    };
+              increaseAmountButton()
+        };
   
     const decreasingHandler = () => {
           if(count !== 0)
               setCount(count - 1);
+              drecreaseAmountButton()
+              
     };
 
     return (

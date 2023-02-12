@@ -29,14 +29,17 @@ const itemsList = [
 
 function App() {
   let [totalAmount, setTotalAmount] = useState(0)
-  const totalAmountSetter = costItem =>{
+  const increaseAmount  = costItem =>{
     setTotalAmount(totalAmount + costItem)
+  };
+  const drecreaseAmount  = costItem =>{
+    setTotalAmount(totalAmount - costItem)
   };
 
   return (
     <div className="App">
       <div className='item-counter'>
-        <ItemContainer totalAmountSetter={totalAmountSetter} items={itemsList}/>
+        <ItemContainer increaseAmount={increaseAmount} drecreaseAmount={drecreaseAmount} items={itemsList}/>
       </div>
       <div className='wallet-zone'>
         <div className='total'>

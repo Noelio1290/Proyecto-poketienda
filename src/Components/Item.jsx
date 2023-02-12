@@ -1,9 +1,12 @@
 import React from "react";
 import CounterItem from "./Counter-Item";
 
-const Item = ({name,cost,img,totalAmountSetter} ) => {
-  const clickHandler= () => {
-    totalAmountSetter(cost)
+const Item = ({name,cost,img,increaseAmount,drecreaseAmount} ) => {
+  const increaseAmountButton= () => {
+    increaseAmount(cost)
+  }
+  const drecreaseAmountButton=()=>{
+    drecreaseAmount(cost)
   }
   return (
     <div className='item-full'>
@@ -12,7 +15,7 @@ const Item = ({name,cost,img,totalAmountSetter} ) => {
         <div className="name">{name}</div>
         <div className="cost">${cost}</div>
       </div>
-      <CounterItem clickHandler={clickHandler}/>
+      <CounterItem increaseAmountButton={increaseAmountButton} drecreaseAmountButton={drecreaseAmountButton}/>
     </div>
   );
 };
