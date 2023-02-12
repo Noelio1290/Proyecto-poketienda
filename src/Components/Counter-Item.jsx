@@ -1,9 +1,12 @@
 import { useState } from "react"; 
 
-const CounterItem = () => {
+const CounterItem = ({clickHandler}) => {
     let [count, setCount] = useState(0)
     const increasingHandler = () => {
               setCount(count + 1);
+              clickHandler()
+              
+            
     };
   
     const decreasingHandler = () => {
@@ -16,8 +19,8 @@ const CounterItem = () => {
           <button className="button-decreasing-counter-item" onClick={decreasingHandler}>-</button>
           <p className="count">{count}</p>
           <button className="button-increasing-counter-item" onClick={increasingHandler}>+</button>
-      </div>
-    )
+        </div>
+        )
 
 };
 

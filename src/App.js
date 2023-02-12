@@ -1,4 +1,5 @@
 import './App.css';
+import { useState } from 'react';
 import ItemContainer from './Components/Item-Container';
 import Total from './Components/Total';
 import ButtonPago from './Components/Button-Pay';
@@ -27,14 +28,19 @@ const itemsList = [
 ]
 
 function App() {
+  let [totalAmount, setTotalAmount] = useState(0)
+  const totalAmountSetter = costItem =>{
+    setTotalAmount(totalAmount + costItem)
+  };
+
   return (
     <div className="App">
       <div className='item-counter'>
-        <ItemContainer items={itemsList}/>
+        <ItemContainer totalAmountSetter={totalAmountSetter} items={itemsList}/>
       </div>
       <div className='wallet-zone'>
         <div className='total'>
-          <Total/>
+          <Total amount={totalAmount}/>
         </div>
         <div className='button-Pay'>
           <ButtonPago/>

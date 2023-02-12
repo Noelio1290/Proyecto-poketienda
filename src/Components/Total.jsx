@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Total() {
+function Total({ amount }) {
   return (
     <div className='total-amount'>
-      <p>Total: $$$$</p>
+      <p>{amount}</p>
     </div>
   );
 }
