@@ -42,7 +42,7 @@ function App() {
         <ItemContainer increaseAmount={increaseAmount} drecreaseAmount={drecreaseAmount} items={itemsList}/>
       </div>
       <div className='wallet-zone'>
-        <div className='total'>
+        <div className='total'>increaseAmount
           <Total amount={totalAmount}/>
         </div>
         <div className='button-Pay'>
