@@ -10,6 +10,7 @@ const CounterItem = ({increaseAmountButton,drecreaseAmountButton}) => {
     const decreasingHandler = () => {
           if(count !== 0)
               setCount(count - 1);
+              if (count > 0)
               drecreaseAmountButton()
               
     };

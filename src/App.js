@@ -4,8 +4,6 @@ import ItemContainer from './Components/Item-Container';
 import Total from './Components/Total';
 import ButtonPago from './Components/Button-Pay';
 import Wallet from './Components/Wallet';
-import ButtonAdd from './Components/Button-Add';
-import ButtonRemove from './Components/Button-Remove';
 
 const itemsList = [
   {
@@ -30,13 +28,17 @@ const itemsList = [
 function App() {
   //variable for 
   let [totalAmount, setTotalAmount] = useState(0)
+  let [myMoneyTotalAmount] = useState(1000)
 
   const increaseAmount  = costItem =>{
     setTotalAmount(totalAmount + costItem)
   };
   const drecreaseAmount  = costItem =>{
-    if(totalAmount !== 0)
-    setTotalAmount(totalAmount - costItem)
+    if((totalAmount - costItem) <= 0) {
+      setTotalAmount(0)
+    } else {
+      setTotalAmount(totalAmount - costItem)
+    }
   };
 
   return (
@@ -45,22 +47,15 @@ function App() {
         <ItemContainer increaseAmount={increaseAmount} drecreaseAmount={drecreaseAmount} items={itemsList}/>
       </div>
       <div className='wallet-zone'>
-        <div className='total'>increaseAmount
+        <div className='total'>Total:
           <Total amount={totalAmount}/>
         </div>
         <div className='button-Pay'>
           <ButtonPago/>
         </div>
         <div className='wallet'>
-          <Wallet/>
-          <div className='wallet buttons'>
-            <ButtonAdd/>
-            <ButtonRemove/>
-          </div>
+          <Wallet myMoneyAmount={myMoneyTotalAmount}/>
         </div>
-        <div className='input'>
-          <input type="text" name="entrada-dinero" />
-        </div>  
       </div>
       
       
