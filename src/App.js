@@ -26,10 +26,12 @@ const itemsList = [
 ]
 
 function App() {
-  //variable for 
+  //variable for Total
   let [totalAmount, setTotalAmount] = useState(0)
-  let [myMoneyTotalAmount] = useState(1000)
-
+  //Variable for MyMoney
+  let [myMoneyTotalAmount, setMyMoneyTotalAmount] = useState(1000)
+  
+  //Methods for var Total
   const increaseAmount  = costItem =>{
     setTotalAmount(totalAmount + costItem)
   };
@@ -54,7 +56,7 @@ function App() {
           <ButtonPago/>
         </div>
         <div className='wallet'>
-          <Wallet myMoneyAmount={myMoneyTotalAmount}/>
+          <Wallet myMoneyTotalAmount={myMoneyTotalAmount} setMyMoneyTotalAmount={setMyMoneyTotalAmount}/>
         </div>
       </div>
       
