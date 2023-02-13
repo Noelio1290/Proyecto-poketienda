@@ -28,11 +28,14 @@ const itemsList = [
 ]
 
 function App() {
+  //variable for 
   let [totalAmount, setTotalAmount] = useState(0)
+
   const increaseAmount  = costItem =>{
     setTotalAmount(totalAmount + costItem)
   };
   const drecreaseAmount  = costItem =>{
+    if(totalAmount !== 0)
     setTotalAmount(totalAmount - costItem)
   };
 
