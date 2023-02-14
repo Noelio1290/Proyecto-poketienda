@@ -1,18 +1,24 @@
-import { useState } from "react"; 
+import React from "react";
 
-const CounterItem = ({increaseAmountButton,drecreaseAmountButton}) => {
-    let [count, setCount] = useState(0)
+const CounterItem = (
+  {
+    identifier,
+    count,
+    increaseAmountButton,
+    decreaseAmountButton,
+    increaseItemCounter,
+    decreaseItemCounter,
+  }) => {
     const increasingHandler = () => {
-              setCount(count + 1);
-              increaseAmountButton()
-        };
+      increaseItemCounter(identifier)
+      increaseAmountButton()
+    };
   
     const decreasingHandler = () => {
-          if(count !== 0)
-              setCount(count - 1);
-              if (count > 0)
-              drecreaseAmountButton()
-              
+      if(count !==0){
+        decreaseItemCounter(identifier); 
+        decreaseAmountButton()    
+      };   
     };
 
     return (

@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import ItemContainer from './Components/Item-Container';
 import Total from './Components/Total';
@@ -32,13 +32,26 @@ function App() {
   //variable for Total
   let [totalAmount, setTotalAmount] = useState(0)
   //Variable for MyMoney
-  let [myMoneyTotalAmount, setMyMoneyTotalAmount] = useState(1000)
+  let [myMoneyTotalAmount, setMyMoneyTotalAmount] = useState(59000)
+  //Variable for counter
+  let [countersRecord, setCountersRecord] = useState(new Map())
+
+  useEffect(()=>{
+    const temporaryRecord = new Map()
+    for (let index = 0; index < itemsList.length; index++) {
+      const element = itemsList[index];
+      const id = `Item-number-${index}`;
+      temporaryRecord.set(id, {...element, id, counter: 0})
+    }
+    setCountersRecord(temporaryRecord)
+  }, [])
+
   
   //Methods for var Total
   const increaseAmount  = costItem =>{
     setTotalAmount(totalAmount + costItem)
   };
-  const drecreaseAmount  = costItem =>{
+  const decreaseAmount  = costItem =>{
     if((totalAmount - costItem) <= 0) {
       setTotalAmount(0)
     } else {
@@ -46,22 +59,62 @@ function App() {
     }
   };
 
-  //Method for Modificate Count
+  const increaseItemCounter = (itemId) => {
+    const temporaryRecord = new Map(countersRecord)
+    const item = temporaryRecord.get(itemId);
+    item.counter = item.counter + 1;
+    temporaryRecord.set(itemId, item)
+    setCountersRecord(temporaryRecord)
+  }
+
+  const decreaseItemCounter = (itemId) => {
+    const temporaryRecord = new Map(countersRecord)
+    const item = temporaryRecord.get(itemId);
+    if(item.counter>0 ){
+    item.counter = item.counter - 1;
+    temporaryRecord.set(itemId, item)
+    setCountersRecord(temporaryRecord)
+    }
+  }
+
+  const makePayment = () => {
+    const temporaryRecord = new Map(countersRecord);
+    for (const key of temporaryRecord.keys()) {
+      const item = temporaryRecord.get(key)
+      item.counter = 0;
+      temporaryRecord.set(key, item)
+    }
+    setCountersRecord(temporaryRecord)
+  }
+
 
   return (
     <div className="App">
       <div className='item-counter'>
-        <ItemContainer increaseAmount={increaseAmount} drecreaseAmount={drecreaseAmount} items={itemsList}/>
+        <ItemContainer 
+          totalAmount={totalAmount}
+          increaseAmount={increaseAmount}
+          decreaseAmount={decreaseAmount}
+          increaseItemCounter={increaseItemCounter}
+          decreaseItemCounter={decreaseItemCounter}
+          items={countersRecord}/>
       </div>
       <div className='wallet-zone'>
         <div className='total'>Total:
           <Total amount={totalAmount}/>
         </div>
         <div className='button-Pay'>
-          <ButtonPago totalAmount={totalAmount} myMoneyTotalAmount={myMoneyTotalAmount} setMyMoneyTotalAmount={setMyMoneyTotalAmount} />
+          <ButtonPago
+            makePayment={makePayment} 
+            totalAmount={totalAmount} 
+            setTotalAmount={setTotalAmount}
+            myMoneyTotalAmount={myMoneyTotalAmount} 
+            setMyMoneyTotalAmount={setMyMoneyTotalAmount} />
         </div>
         <div className='wallet'>
-          <Wallet myMoneyTotalAmount={myMoneyTotalAmount} setMyMoneyTotalAmount={setMyMoneyTotalAmount}/>
+          <Wallet 
+            myMoneyTotalAmount={myMoneyTotalAmount} 
+            setMyMoneyTotalAmount={setMyMoneyTotalAmount}/>
         </div>
       </div>
       
