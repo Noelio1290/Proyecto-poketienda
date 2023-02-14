@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import ItemContainer from './Components/Item-Container';
 import Total from './Components/Total';
@@ -33,6 +33,18 @@ function App() {
   let [totalAmount, setTotalAmount] = useState(0)
   //Variable for MyMoney
   let [myMoneyTotalAmount, setMyMoneyTotalAmount] = useState(1000)
+  let [countersRecord, setCountersRecord] = useState(new Map())
+
+  useEffect(()=>{
+    const temporaryRecord = new Map()
+    for (let index = 0; index < itemsList.length; index++) {
+      const element = itemsList[index];
+      const id = `Item-number-${index}`;
+      temporaryRecord.set(id, {...element, id, counter: 0})
+    }
+    setCountersRecord(temporaryRecord)
+  }, [])
+
   
   //Methods for var Total
   const increaseAmount  = costItem =>{
@@ -51,7 +63,7 @@ function App() {
   return (
     <div className="App">
       <div className='item-counter'>
-        <ItemContainer increaseAmount={increaseAmount} drecreaseAmount={drecreaseAmount} items={itemsList}/>
+        <ItemContainer increaseAmount={increaseAmount} drecreaseAmount={drecreaseAmount} items={countersRecord}/>
       </div>
       <div className='wallet-zone'>
         <div className='total'>Total:

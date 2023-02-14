@@ -5,8 +5,6 @@ const ButtonPay = ({totalAmount,myMoneyTotalAmount,setMyMoneyTotalAmount}) => {
     if(totalAmount <= myMoneyTotalAmount){
       alert("Compra Exitosa!!")
       setMyMoneyTotalAmount(myMoneyTotalAmount-totalAmount)
-
-
     }else{
       alert("¡Te Falta Dinero!")
     }
