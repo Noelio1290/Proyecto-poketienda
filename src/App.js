@@ -50,7 +50,7 @@ function App() {
   const increaseAmount  = costItem =>{
     setTotalAmount(totalAmount + costItem)
   };
-  const drecreaseAmount  = costItem =>{
+  const decreaseAmount  = costItem =>{
     if((totalAmount - costItem) <= 0) {
       setTotalAmount(0)
     } else {
@@ -58,22 +58,48 @@ function App() {
     }
   };
 
+  const increaseItemCounter = (itemId) => {
+    const temporaryRecord = new Map(countersRecord)
+    const item = temporaryRecord.get(itemId);
+    item.counter = item.counter + 1;
+    temporaryRecord.set(itemId, item)
+    setCountersRecord(temporaryRecord)
+  }
+
+  const decreaseItemCounter = (itemId) => {
+    const temporaryRecord = new Map(countersRecord)
+    const item = temporaryRecord.get(itemId);
+    item.counter = item.counter - 1;
+    temporaryRecord.set(itemId, item)
+    setCountersRecord(temporaryRecord)
+  }
+
   //Method for Modificate Count
 
   return (
     <div className="App">
       <div className='item-counter'>
-        <ItemContainer increaseAmount={increaseAmount} drecreaseAmount={drecreaseAmount} items={countersRecord}/>
+        <ItemContainer 
+          increaseAmount={increaseAmount}
+          decreaseAmount={decreaseAmount}
+          increaseItemCounter={increaseItemCounter}
+          decreaseItemCounter={decreaseItemCounter}
+          items={countersRecord}/>
       </div>
       <div className='wallet-zone'>
         <div className='total'>Total:
           <Total amount={totalAmount}/>
         </div>
         <div className='button-Pay'>
-          <ButtonPago totalAmount={totalAmount} myMoneyTotalAmount={myMoneyTotalAmount} setMyMoneyTotalAmount={setMyMoneyTotalAmount} />
+          <ButtonPago 
+            totalAmount={totalAmount} 
+            myMoneyTotalAmount={myMoneyTotalAmount} 
+            setMyMoneyTotalAmount={setMyMoneyTotalAmount} />
         </div>
         <div className='wallet'>
-          <Wallet myMoneyTotalAmount={myMoneyTotalAmount} setMyMoneyTotalAmount={setMyMoneyTotalAmount}/>
+          <Wallet 
+            myMoneyTotalAmount={myMoneyTotalAmount} 
+            setMyMoneyTotalAmount={setMyMoneyTotalAmount}/>
         </div>
       </div>
       

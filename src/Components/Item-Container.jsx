@@ -1,7 +1,14 @@
 import {React, useEffect, useState} from 'react';
 import Item from './Item';
 
-const ItemContainer = ({ items, increaseAmount, drecreaseAmount }) =>{
+const ItemContainer = (
+    { 
+        items, 
+        increaseAmount, 
+        decreaseAmount,
+        increaseItemCounter,
+        decreaseItemCounter
+    }) =>{
 
     let [listItems, setListItems] = useState([])
     useEffect(() => {
@@ -14,7 +21,20 @@ const ItemContainer = ({ items, increaseAmount, drecreaseAmount }) =>{
 
     return (
         <div className='space-item-counter'>
-            {listItems.map(item => <Item key={item.id} name={item.name} cost={item.cost} img={item.img} increaseAmount={increaseAmount} drecreaseAmount={drecreaseAmount} />)}
+            {listItems.map(item => (
+                <Item 
+                    key={item.id}
+                    identifier={item.id}
+                    name={item.name} 
+                    cost={item.cost} 
+                    img={item.img}
+                    count={item.counter}
+                    increaseAmount={increaseAmount} 
+                    decreaseAmount={decreaseAmount}
+                    increaseItemCounter={increaseItemCounter}
+                    decreaseItemCounter={decreaseItemCounter}
+                />)
+            )}
         </div>
     )
 };

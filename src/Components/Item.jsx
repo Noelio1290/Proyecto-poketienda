@@ -1,12 +1,24 @@
 import React from "react";
 import CounterItem from "./Counter-Item";
 
-const Item = ({name,cost,img,increaseAmount,drecreaseAmount} ) => {
+const Item = (
+  {
+    name,
+    cost,
+    img,
+    count,
+    identifier,
+    increaseAmount,
+    decreaseAmount,
+    increaseItemCounter,
+    decreaseItemCounter,
+
+  }) => {
   const increaseAmountButton= () => {
     increaseAmount(cost)
   }
-  const drecreaseAmountButton=()=>{
-    drecreaseAmount(cost)
+  const decreaseAmountButton=()=>{
+    decreaseAmount(cost)
   }
   return (
     <div className='item-full'>
@@ -15,7 +27,14 @@ const Item = ({name,cost,img,increaseAmount,drecreaseAmount} ) => {
         <div className="name">{name}</div>
         <div className="cost">${cost}</div>
       </div>
-      <CounterItem increaseAmountButton={increaseAmountButton} drecreaseAmountButton={drecreaseAmountButton}/>
+      <CounterItem
+        identifier={identifier}
+        increaseAmountButton={increaseAmountButton} 
+        decreaseAmountButton={decreaseAmountButton}
+        increaseItemCounter={increaseItemCounter}
+        decreaseItemCounter={decreaseItemCounter}
+        count={count}
+      />
     </div>
   );
 };
