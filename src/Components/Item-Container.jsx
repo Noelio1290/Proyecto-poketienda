@@ -3,7 +3,8 @@ import Item from './Item';
 
 const ItemContainer = (
     { 
-        items, 
+        items,
+        totalAmount,
         increaseAmount, 
         decreaseAmount,
         increaseItemCounter,
@@ -29,6 +30,7 @@ const ItemContainer = (
                     cost={item.cost} 
                     img={item.img}
                     count={item.counter}
+                    totalAmount={totalAmount}
                     increaseAmount={increaseAmount} 
                     decreaseAmount={decreaseAmount}
                     increaseItemCounter={increaseItemCounter}

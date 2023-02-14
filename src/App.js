@@ -32,7 +32,8 @@ function App() {
   //variable for Total
   let [totalAmount, setTotalAmount] = useState(0)
   //Variable for MyMoney
-  let [myMoneyTotalAmount, setMyMoneyTotalAmount] = useState(1000)
+  let [myMoneyTotalAmount, setMyMoneyTotalAmount] = useState(59000)
+  //Variable for counter
   let [countersRecord, setCountersRecord] = useState(new Map())
 
   useEffect(()=>{
@@ -69,17 +70,29 @@ function App() {
   const decreaseItemCounter = (itemId) => {
     const temporaryRecord = new Map(countersRecord)
     const item = temporaryRecord.get(itemId);
+    if(item.counter>0 ){
     item.counter = item.counter - 1;
     temporaryRecord.set(itemId, item)
     setCountersRecord(temporaryRecord)
+    }
   }
 
-  //Method for Modificate Count
+  const makePayment = () => {
+    const temporaryRecord = new Map(countersRecord);
+    for (const key of temporaryRecord.keys()) {
+      const item = temporaryRecord.get(key)
+      item.counter = 0;
+      temporaryRecord.set(key, item)
+    }
+    setCountersRecord(temporaryRecord)
+  }
+
 
   return (
     <div className="App">
       <div className='item-counter'>
         <ItemContainer 
+          totalAmount={totalAmount}
           increaseAmount={increaseAmount}
           decreaseAmount={decreaseAmount}
           increaseItemCounter={increaseItemCounter}
@@ -91,8 +104,10 @@ function App() {
           <Total amount={totalAmount}/>
         </div>
         <div className='button-Pay'>
-          <ButtonPago 
+          <ButtonPago
+            makePayment={makePayment} 
             totalAmount={totalAmount} 
+            setTotalAmount={setTotalAmount}
             myMoneyTotalAmount={myMoneyTotalAmount} 
             setMyMoneyTotalAmount={setMyMoneyTotalAmount} />
         </div>

@@ -8,6 +8,7 @@ const Item = (
     img,
     count,
     identifier,
+    totalAmount,
     increaseAmount,
     decreaseAmount,
     increaseItemCounter,
@@ -29,6 +30,7 @@ const Item = (
       </div>
       <CounterItem
         identifier={identifier}
+        totalAmount={totalAmount}
         increaseAmountButton={increaseAmountButton} 
         decreaseAmountButton={decreaseAmountButton}
         increaseItemCounter={increaseItemCounter}
