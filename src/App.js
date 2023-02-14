@@ -1,9 +1,12 @@
 import './App.css';
 import { useState } from 'react';
+import React from 'react';
 import ItemContainer from './Components/Item-Container';
 import Total from './Components/Total';
 import ButtonPago from './Components/Button-Pay';
 import Wallet from './Components/Wallet';
+
+export const acountCout = React.createContext();
 
 const itemsList = [
   {
@@ -43,6 +46,8 @@ function App() {
     }
   };
 
+  //Method for Modificate Count
+
   return (
     <div className="App">
       <div className='item-counter'>
@@ -53,7 +58,7 @@ function App() {
           <Total amount={totalAmount}/>
         </div>
         <div className='button-Pay'>
-          <ButtonPago/>
+          <ButtonPago totalAmount={totalAmount} myMoneyTotalAmount={myMoneyTotalAmount} setMyMoneyTotalAmount={setMyMoneyTotalAmount} />
         </div>
         <div className='wallet'>
           <Wallet myMoneyTotalAmount={myMoneyTotalAmount} setMyMoneyTotalAmount={setMyMoneyTotalAmount}/>

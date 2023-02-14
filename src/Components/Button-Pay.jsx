@@ -1,13 +1,22 @@
 import React from 'react';
 
-const ButtonPago = () => {
-  console.log('im re rendering tha button-Pay')
+const ButtonPay = ({totalAmount,myMoneyTotalAmount,setMyMoneyTotalAmount}) => {
+  const buttonfunction = ()=>{
+    if(totalAmount <= myMoneyTotalAmount){
+      alert("Compra Exitosa!!")
+      setMyMoneyTotalAmount(myMoneyTotalAmount-totalAmount)
+
+
+    }else{
+      alert("¡Te Falta Dinero!")
+    }
+  }
 
   return (
-    <button onClick={()=>{console.log("le di click al Boton")}}>
+    <button onClick={buttonfunction}>
       Pagar
     </button>
   );
 };
 
-export default ButtonPago;
+export default ButtonPay;
