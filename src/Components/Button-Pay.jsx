@@ -7,20 +7,35 @@ const ButtonPay = (
     myMoneyTotalAmount,
     setMyMoneyTotalAmount,
     makePayment,
+    setModalActive,
+    setLegend
   }) => {
-  const buttonfunction = ()=>{
-    if(totalAmount <= myMoneyTotalAmount){
-      makePayment()
-      alert("Compra Exitosa!!")
-      setMyMoneyTotalAmount(myMoneyTotalAmount-totalAmount)
-      setTotalAmount(0)
-    }else{
-      alert("¡Te Falta Dinero!")
+    const modalACT = ()=>{
+      setModalActive("modalActive")
+    };
+    const legendChangeExito = () => {
+      setLegend("Compra Exitosa!! ")
     }
-  }
+    const legendChangeError = () => {
+      setLegend("!Te Falta Dinero Pobre¡")
+    }
+
+    const buttonFunction = ()=>{
+      if(totalAmount <= myMoneyTotalAmount){
+        makePayment()
+        setMyMoneyTotalAmount(myMoneyTotalAmount-totalAmount)
+        setTotalAmount(0)
+        legendChangeExito()
+        modalACT()
+      }else{
+        legendChangeError()
+        modalACT()
+
+      }
+  };
 
   return (
-    <button onClick={buttonfunction}>
+    <button onClick={buttonFunction}>
       Pagar
     </button>
   );

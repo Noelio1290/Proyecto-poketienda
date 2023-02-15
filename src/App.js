@@ -3,10 +3,9 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import ItemContainer from './Components/Item-Container';
 import Total from './Components/Total';
-import ButtonPago from './Components/Button-Pay';
+import ButtonPay from './Components/Button-Pay';
 import Wallet from './Components/Wallet';
-
-export const acountCout = React.createContext();
+import ModalActive from './Components/Modal';
 
 const itemsList = [
   {
@@ -32,9 +31,12 @@ function App() {
   //variable for Total
   let [totalAmount, setTotalAmount] = useState(0)
   //Variable for MyMoney
-  let [myMoneyTotalAmount, setMyMoneyTotalAmount] = useState(59000)
+  let [myMoneyTotalAmount, setMyMoneyTotalAmount] = useState(25000)
   //Variable for counter
   let [countersRecord, setCountersRecord] = useState(new Map())
+  //Variable for purchase legend
+  let [modalActive,setModalActive]= useState("modal")
+  let [legend,setLegend] = useState("")
 
   useEffect(()=>{
     const temporaryRecord = new Map()
@@ -75,7 +77,7 @@ function App() {
     temporaryRecord.set(itemId, item)
     setCountersRecord(temporaryRecord)
     }
-  }
+  };
 
   const makePayment = () => {
     const temporaryRecord = new Map(countersRecord);
@@ -85,8 +87,8 @@ function App() {
       temporaryRecord.set(key, item)
     }
     setCountersRecord(temporaryRecord)
-  }
-
+  };
+  ////Methods for for purchase legend
 
   return (
     <div className="App">
@@ -104,12 +106,15 @@ function App() {
           <Total amount={totalAmount}/>
         </div>
         <div className='button-Pay'>
-          <ButtonPago
+          <ButtonPay
             makePayment={makePayment} 
             totalAmount={totalAmount} 
             setTotalAmount={setTotalAmount}
             myMoneyTotalAmount={myMoneyTotalAmount} 
-            setMyMoneyTotalAmount={setMyMoneyTotalAmount} />
+            setMyMoneyTotalAmount={setMyMoneyTotalAmount}
+            modalActive={modalActive}
+            setModalActive={setModalActive}
+            setLegend={setLegend} />
         </div>
         <div className='wallet'>
           <Wallet 
@@ -117,8 +122,11 @@ function App() {
             setMyMoneyTotalAmount={setMyMoneyTotalAmount}/>
         </div>
       </div>
-      
-      
+      <ModalActive 
+        modalActive={modalActive} 
+        setModalActive={setModalActive} 
+        oracion={legend}
+      />
     </div>
   );
 }

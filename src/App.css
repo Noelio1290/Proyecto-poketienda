@@ -47,3 +47,20 @@
     height:30px;
 
 }
+
+
+.modal{
+    display: none;
+}
+
+.modalActive{
+    display: flex;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+}
