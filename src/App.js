@@ -38,6 +38,7 @@ function App() {
   let [modalActive,setModalActive]= useState("modal")
   let [legend,setLegend] = useState("")
 
+  //Methods to add a counter to the item
   useEffect(()=>{
     const temporaryRecord = new Map()
     for (let index = 0; index < itemsList.length; index++) {
@@ -61,6 +62,7 @@ function App() {
     }
   };
 
+  //Methods for var Counter
   const increaseItemCounter = (itemId) => {
     const temporaryRecord = new Map(countersRecord)
     const item = temporaryRecord.get(itemId);
@@ -88,7 +90,6 @@ function App() {
     }
     setCountersRecord(temporaryRecord)
   };
-  ////Methods for for purchase legend
 
   return (
     <div className="App">
