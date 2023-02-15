@@ -9,7 +9,7 @@ const closeModal = () => {
         <div className={modalActive}>
             <div className="ventana">
                 <p>{oracion}</p>
-                <button onClick={closeModal}>Aceptar</button>
+                <button className="buttonWindow" onClick={closeModal}>Aceptar</button>
             </div>
         </div>
     )
