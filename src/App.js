@@ -6,47 +6,57 @@ import Total from './Components/Total';
 import ButtonPay from './Components/Button-Pay';
 import Wallet from './Components/Wallet';
 import ModalActive from './Components/Modal';
+const api = "https://pokeapi.co/api/v2/item"
 
-const itemsList = [
-  {
-      name:"Potion",
-      cost: 200,
-      img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/potion.png"
 
-  },
-  {
-      name:"Super-potion",
-      cost:700,
-      img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/super-potion.png"
-
-  },
-  {
-      name:"Hyper-potion",
-      cost: 1500,
-      img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/hyper-potion.png"
-  }    
-]
 
 function App() {
   //variable for Total
   let [totalAmount, setTotalAmount] = useState(0)
   //Variable for MyMoney
-  let [myMoneyTotalAmount, setMyMoneyTotalAmount] = useState(25000)
+  let [myMoneyTotalAmount, setMyMoneyTotalAmount] = useState(25000);
   //Variable for counter
-  let [countersRecord, setCountersRecord] = useState(new Map())
+  let [countersRecord, setCountersRecord] = useState(new Map());
   //Variable for purchase legend
-  let [modalActive,setModalActive]= useState("modal")
-  let [legend,setLegend] = useState("")
+  let [modalActive,setModalActive]= useState("modal");
+  let [legend,setLegend] = useState("");
 
   //Methods to add a counter to the item
   useEffect(()=>{
-    const temporaryRecord = new Map()
-    for (let index = 0; index < itemsList.length; index++) {
-      const element = itemsList[index];
-      const id = `Item-number-${index}`;
-      temporaryRecord.set(id, {...element, id, counter: 0})
+    const getItem = async (id)=>{
+      const payload = await fetch(`${api}/${id}`)
+      const data = await payload.json()
+      const datosPokemon = {
+        img:data.sprites.default,
+        name:data.name.charAt(0).toUpperCase() + data.name.slice(1),
+        cost:data.cost
+      }
+      return datosPokemon
     }
-    setCountersRecord(temporaryRecord)
+  
+    const getItems = async () => {
+      console.log('im being calling')
+      const itemId = [17,26,25,24,23,4,3,2,83]
+      const pokeNames = []
+
+      try {
+        for(let i = 0; i < itemId.length; i++){
+          pokeNames.push(await getItem(itemId[i]))
+        }
+      } catch (error) {
+        console.log(error)
+      }
+
+      const temporaryRecord = new Map()
+      for (let index = 0; index < pokeNames.length; index++) {
+        const element = pokeNames[index];
+        const id = `Item-number-${index}`;
+        temporaryRecord.set(id, {...element, id, counter: 0})
+      }
+      setCountersRecord(temporaryRecord)
+    };
+
+    getItems()
   }, [])
 
   
